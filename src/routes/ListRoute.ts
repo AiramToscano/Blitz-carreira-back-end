@@ -3,6 +3,7 @@ import ListController from '../controllers/ListControllers';
 import ListService from '../services/ListService';
 import ListModel from '../models/ListModel';
 import connection from '../models/connection';
+import validator from '../utils/Validators';
 
 const ListRoute = Router();
 
@@ -10,7 +11,7 @@ const ListControllers = new ListController(new ListService(new ListModel(connect
 
 ListRoute.get('/', ListControllers.getTalks);
 ListRoute.post('/', ListControllers.postTalks);
-ListRoute.put('/', ListControllers.putTalks);
+ListRoute.put('/', validator.validatename, validator.validatestatus, ListControllers.putTalks);
 ListRoute.delete('/', ListControllers.deleteTalks);
 
 export default ListRoute;

@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { ListTalks } from '../interfaces/ListInterface';
+import validator from '../utils/Validators';
 
 interface Model {
    getlist(): Promise<ListTalks[]>

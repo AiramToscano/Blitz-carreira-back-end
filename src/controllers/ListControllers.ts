@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import { ListTalks } from '../interfaces/ListInterface';
 
 interface Service {
@@ -19,16 +19,17 @@ export default class ListController {
     res.status(200).json(list);
   };
 
-  public postTalks = async (req: Request, res: Response): Promise<void> => {
+  public postTalks = async (req: Request, res: Response, _next: NextFunction): Promise<void> => {
     const { name, status } = req.body;
     const postTalks = await this.service.postlist(name, status);
     res.status(201).json(postTalks);
   };
 
-  public putTalks = async (req: Request, res: Response): Promise<void> => {
+  public putTalks = async (req: Request, res: Response, _next: NextFunction)
+  : Promise<void | object> => {
     const { name, status } = req.body;
     const postTalks = await this.service.putlist(name, status);
-    res.status(200).json(postTalks);
+    return res.status(200).json(postTalks);
   };
 
   public deleteTalks = async (req: Request, res: Response): Promise<void> => {
