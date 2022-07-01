@@ -10,5 +10,7 @@ const ListControllers = new ListController(new ListService(new ListModel(connect
 
 ListRoute.get('/', ListControllers.getTalks);
 ListRoute.post('/', ListControllers.postTalks);
+ListRoute.put('/', ListControllers.putTalks);
+ListRoute.delete('/', ListControllers.deleteTalks);
 
 export default ListRoute;

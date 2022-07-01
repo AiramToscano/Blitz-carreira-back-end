@@ -25,7 +25,7 @@ export default class List {
   public async update(name: string, status: string): Promise<number> {
     const query = 'UPDATE list.talks SET status = ? WHERE name=?';
     const [newSpectator] = await this.connection
-      .execute<ResultSetHeader>(query, [name, status]);
+      .execute<ResultSetHeader>(query, [status, name]);
     return newSpectator.insertId;
   }
 
