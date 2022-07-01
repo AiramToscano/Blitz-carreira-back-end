@@ -8,6 +8,6 @@ const ListRoute = Router();
 
 const ListControllers = new ListController(new ListService(new ListModel(connection)));
 
-ListRoute.get('/list', ListControllers.getTalks);
+ListRoute.get('/', ListControllers.getTalks);
 
 export default ListRoute;
