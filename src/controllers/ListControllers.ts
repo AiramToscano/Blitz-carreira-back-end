@@ -14,27 +14,43 @@ export default class ListController {
     this.service = service;
   }
 
-  public getTalks = async (_req: Request, res: Response): Promise<void> => {
-    const list = await this.service.getlist();
-    res.status(200).json(list);
+  public getTalks = async (_req: Request, res: Response): Promise<object> => {
+    try {
+      const list = await this.service.getlist();
+      return res.status(200).json(list);
+    } catch (err) {
+      return res.status(500).json({ message: 'Ocorreu um erro inesperado' });
+    }
   };
 
-  public postTalks = async (req: Request, res: Response, _next: NextFunction): Promise<void> => {
+  public postTalks = async (req: Request, res: Response, _next: NextFunction): Promise<object> => {
     const { name, status } = req.body;
-    const postTalks = await this.service.postlist(name, status);
-    res.status(201).json(postTalks);
+    try {
+      const postTalks = await this.service.postlist(name, status);
+      return res.status(201).json(postTalks);
+    } catch (err) {
+      return res.status(500).json({ message: 'Ocorreu um erro inesperado' });
+    }
   };
 
   public putTalks = async (req: Request, res: Response, _next: NextFunction)
   : Promise<void | object> => {
     const { name, status } = req.body;
-    const postTalks = await this.service.putlist(name, status);
-    return res.status(200).json(postTalks);
+    try {
+      const postTalks = await this.service.putlist(name, status);
+      return res.status(200).json(postTalks);
+    } catch (err) {
+      return res.status(500).json({ message: 'Ocorreu um erro inesperado' });
+    }
   };
 
-  public deleteTalks = async (req: Request, res: Response): Promise<void> => {
+  public deleteTalks = async (req: Request, res: Response): Promise<object> => {
     const { name } = req.body;
-    await this.service.deletelist(name);
-    res.status(204).end();
+    try {
+      await this.service.deletelist(name);
+      return res.status(204).end();
+    } catch (err) {
+      return res.status(500).json({ message: 'Ocorreu um erro inesperado' });
+    }
   };
 }

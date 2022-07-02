@@ -5,11 +5,13 @@ export default class Validator {
     const { name } = req.body;
     if (!name) return res.status(400).json({ message: '"name" is required' });
     next();
+    return false;
   };
 
   static validatestatus = (req: Request, res: Response, next: NextFunction) => {
     const { status } = req.body;
-    next();
     if (!status) return res.status(400).json({ message: '"status" is required' });
+    next();
+    return false;
   };
 }
